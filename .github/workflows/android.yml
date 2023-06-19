@@ -7,17 +7,22 @@ on:
     pull_request:
         branches:
             - master
-    workflow_dispatch: #Allow triggering builds manually from Actions tab in GitHub
+    workflow_dispatch:
+        inputs:
+          djikey:
+            type: string
+            description: DJI API Key
+          googlekey:
+            type: string
+            description: Google Maps API Key
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
       with:
         lfs: true
-
     # NDK installation https://github.com/actions/runner-images/issues/60
     - name: Setup Android NDKv2
       run: ${ANDROID_HOME}/tools/bin/sdkmanager --install "ndk;22.0.7026061"
