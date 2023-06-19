@@ -36,5 +36,7 @@ jobs:
       run: chmod +x gradlew
     - name: Copy mock keys
       run: cp ./.github/workflows/mock_keys.xml ./app/src/main/res/values/keys.xml
+    - name: Put api keys in file
+      run: echo "<?xml version="1.0" encoding="utf-8"?><resources><string name="dji_key">${{ inputs.djikey }}</string><string name="google_key">${{ inputs.googlekey }}</string></resources>" > app/src/main/res/values/keys.xml
     - name: Build with Gradle
       run: ./gradlew build
